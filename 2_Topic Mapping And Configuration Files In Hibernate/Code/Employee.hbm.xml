@@ -1,0 +1,15 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="Employee" table="EmployeeTable">
+		<id name="eId" column="ENo">
+			<generator class="assigned" />
+		</id>
+		<property name="eName" column="EName" />
+		
+		<property name="eDesignation"/>
+	
+	</class>
+</hibernate-mapping>
