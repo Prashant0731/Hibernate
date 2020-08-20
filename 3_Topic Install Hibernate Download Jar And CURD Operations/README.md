@@ -72,3 +72,120 @@ and we need to call configure() method in that class, by passing xml configurati
 - finally close the SessionFactory as sf.close()
 
 
+
+# Example On Hibernate Insert Query </br>
+
+- <b>Airline.java</b>        (My POJO class) </br>
+- <b>SaveMainLogic.java</b>  (java file to write our hibernate logic)</br>
+- <b>airlines.hbm.xml</b>    (Xml mapping file )</br>
+- <b>hibernate.cfg.xml</b>   (Xml configuration file)</br>
+
+
+# Airline.java
+
+package com.airlines.test;
+
+public class Airline {
+
+	private Integer aId;
+	private String aName;
+	private String aType;
+	private String aCountry;
+
+	public Integer getaId() {
+		return aId;
+	}
+
+	public void setaId(Integer aId) {
+		this.aId = aId;
+	}
+
+	public String getaName() {
+		return aName;
+	}
+
+	public void setaName(String aName) {
+		this.aName = aName;
+	}
+
+	public String getaType() {
+		return aType;
+	}
+
+	public void setaType(String aType) {
+		this.aType = aType;
+	}
+
+	public String getaCountry() {
+		return aCountry;
+	}
+
+	public void setaCountry(String aCountry) {
+		this.aCountry = aCountry;
+	}
+
+	@Override
+	public String toString() {
+		return "Airline [aId=" + aId + ", aName=" + aName + ", aType=" + aType + ", aCountry=" + aCountry + "]";
+	}
+}
+
+>
+
+# airlines.hbm.xml
+
+
+
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.test.Airline" table="AirlineTable">
+		<id name="aId" column="AirlineIdNo">
+			<generator class="assigned" />
+		</id>
+		<property name="aName" column="AirlineName" />
+
+		<property name="aType" />
+		<property name="aCountry" />
+
+	</class>
+</hibernate-mapping>
+
+
+# hibernate.cfg.xml
+
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+		<!-- Related to the connection START -->
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>   <!-- // oracle.jdbc.driver.OracleDriver -->
+		<property name="connection.url">jdbc:mysql://localhost:3306/Airlines</property>
+		<property name="connection.user">root</property>
+		<property name="connection.password">root</property>
+		<!-- Related to the connection END -->
+
+		<!-- Related to hibernate properties START -->
+		<property name="show_sql">true</property>
+		<property name="dialet">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hbm2ddl.auto">update</property>
+		<!-- Related to hibernate properties END -->
+
+		<!-- Related to mapping START -->   
+		<mapping resource="airlines.hbm.xml" />     <!-- // Our mapping xml file name -->
+		<!-- Related to the mapping END -->
+
+	</session-factory>
+</hibernate-configuration>
+
+
+# DeleteMainLogic.java
+# SaveMainLogic.java
+# SelectMainLogic.java
+# UpdateMainLogic.java
